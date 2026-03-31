@@ -1,13 +1,13 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$host = "db";
-$user = "root"; 
-$pass = "root"; 
-$db   = "driptee_db";
+// This looks for Render variables; if not found, it uses your local "localhost" settings.
+$host = getenv('DB_HOST') ?: "db";
+$user = getenv('DB_USER') ?: "root";
+$pass = getenv('DB_PASS') ?: "root"; 
+$db   = getenv('DB_NAME') ?: "driptee_db";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
