@@ -21,7 +21,7 @@ services:
       - "3306:3306"
     volumes:
       # Automatically imports your .sql file on first startup
-      - ./sql/driptee_db.sql:/docker-entrypoint-initdb.d/driptee_db.sql
+      - ./driptee_db.sql:/docker-entrypoint-initdb.d/driptee_db.sql
       - db_data:/var/lib/mysql
 
 volumes:
