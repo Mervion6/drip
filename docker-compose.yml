@@ -1,0 +1,28 @@
+
+services:
+  # The Web Server
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html
+
+  # The Database
+  db:
+    image: mariadb:10.4  # Matches your SQL dump version
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+   
+    ports:
+      - "3306:3306"
+    volumes:
+      # Automatically imports your .sql file on first startup
+      - ./sql/driptee_db.sql:/docker-entrypoint-initdb.d/driptee_db.sql
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
